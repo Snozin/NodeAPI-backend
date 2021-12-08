@@ -1,21 +1,25 @@
-require("dotenv").config()
-const mongoose = require("mongoose")
-const readline = require("readline")
-const connection = require("./lib/MongooseConnection.js")
-const { Agent, User } = require("./models")
+'use strict'
+
+require('dotenv').config()
+
+const mongoose = require('mongoose')
+const readline = require('readline')
+const connection = require('./lib/MongooseConnection.js')
+// const { Agent, User } = require('./models')
+const { User } = require('./models')
 
 const main = async () => {
   await new Promise((resolve, reject) => {
-    connection.once("open", resolve)
-    connection.once("error", reject)
+    connection.once('open', resolve)
+    connection.once('error', reject)
   })
 
-  if (!(await confirm("¿Quires inicializar la BD? (yes/no)"))) {
-    console.log("Proceso abortado. No se ha borrado nada")
+  if (!(await confirm('¿Quires inicializar la BD? (yes/no)'))) {
+    console.log('Proceso abortado. No se ha borrado nada')
     return process.exit(0)
   }
 
-  // await dropAgents()
+  // await dropCollection('Users')
   // await initAgents()
   await initUsers()
 
@@ -28,27 +32,28 @@ const initAgents = async () => {
 
   const result = await Agent.insertMany([
     {
-      name: "Smith",
+      name: 'Smith',
       age: 30,
     },
     {
-      name: "Doe",
+      name: 'Doe',
       age: 0,
     },
   ])
   console.log(`Insertados ${result.length} agentes.`)
 }
+
 const initUsers = async () => {
   const { deletedCount } = await User.deleteMany()
   console.log(`Eliminados ${deletedCount} usuarios`)
 
   const result = await User.insertMany([
     {
-      email: "admin@example.com",
+      email: 'admin@example.com',
       password: 1234,
     },
     {
-      email: "user@example.com",
+      email: 'user@example.com',
       password: 1234,
     },
   ])
@@ -56,9 +61,10 @@ const initUsers = async () => {
 }
 
 // Eliminar la tabla Agentes completa
-const dropAgents = async () => {
-  const dropped = await connection.dropCollection("agents")
-  console.log("Borrado", dropped)
+const dropCollection = async (collection) => {
+  // const dropped = await connection.dropCollection("agents")
+  const dropped = await connection.dropCollection(collection)
+  console.log('Borrado', dropped)
 }
 
 const confirm = (questionText) =>
@@ -69,7 +75,7 @@ const confirm = (questionText) =>
     })
     rl.question(questionText, (answer) => {
       rl.close()
-      if (answer.toLowerCase() === "yes") {
+      if (answer.toLowerCase() === 'yes') {
         resolve(true)
         return
       }

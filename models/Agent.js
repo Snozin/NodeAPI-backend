@@ -1,11 +1,11 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
 const agentSchema = mongoose.Schema(
   {
     name: { type: String, index: true },
     age: { type: Number, index: true },
   },
-  { collection: "agents" }
+  { collection: 'agents' }
 )
 
 // agentSchema.statics.list = function (filter, limit, skip, fields, sort) {
@@ -17,6 +17,6 @@ const agentSchema = mongoose.Schema(
 //   return query.exec()
 // }
 
-const Agent = mongoose.model("Agent", agentSchema)
+const Agent = mongoose.model('Agent', agentSchema)
 
 module.exports = Agent
