@@ -6,9 +6,10 @@
     "build": "npm-run-all clean transpile",
     "clean": "rimraf transp-server",
     "dev": "cross-env NODE_ENV=development npm-run-all build server",
+    "initDB": "node initDB.js",
     "prod": "cross-env NODE_ENV=production npm-run-all build server",
     "server": "node ./transp-server/bin/www",
-    "start": "npm run prod",
+    "start": "npm run dev",
     "transpile": "babel ./server --out-dir transp-server"
   },
   "dependencies": {
@@ -19,6 +20,7 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "mongoose": "^6.1.0",
     "morgan": "~1.9.1"
   },
   "devDependencies": {
@@ -35,7 +37,11 @@
   },
   "nodemonConfig": {
     "exec": "npm run dev",
-    "watch": ["server/*", "public/*"],
-    "ignore":[]
+    "watch": [
+      "server/*",
+      "public/*",
+      "lib/*"
+    ],
+    "ignore": []
   }
 }
