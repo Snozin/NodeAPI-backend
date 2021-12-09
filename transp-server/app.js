@@ -9,6 +9,8 @@ var _httpErrors = _interopRequireDefault(require("http-errors"));
 
 var _express = _interopRequireDefault(require("express"));
 
+var _expressAsyncHandler = _interopRequireDefault(require("express-async-handler"));
+
 var _path = _interopRequireDefault(require("path"));
 
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
@@ -18,6 +20,10 @@ var _morgan = _interopRequireDefault(require("morgan"));
 var _index = _interopRequireDefault(require("./routes/index"));
 
 var _users = _interopRequireDefault(require("./routes/users"));
+
+var _adverts = _interopRequireDefault(require("./routes/adverts"));
+
+require("../lib/MongooseConnection.js");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
@@ -33,7 +39,8 @@ app.use(_express["default"].urlencoded({
 app.use((0, _cookieParser["default"])());
 app.use(_express["default"]["static"](_path["default"].join(__dirname, "../public")));
 app.use("/", _index["default"]);
-app.use("/users", _users["default"]); // catch 404 and forward to error handler
+app.use("/users", _users["default"]);
+app.use("/adverts", _adverts["default"]); // catch 404 and forward to error handler
 
 app.use(function (req, res, next) {
   next((0, _httpErrors["default"])(404));

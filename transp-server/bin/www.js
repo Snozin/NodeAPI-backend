@@ -3,7 +3,10 @@
 /**
  * Module dependencies.
  */
+// import "core-js/stable"
 "use strict";
+
+require("regenerator-runtime/runtime");
 
 var _app = _interopRequireDefault(require("../app"));
 
