@@ -1,9 +1,9 @@
-const mongoose = require('mongoose')
-require('dotenv').config()
+// const mongoose = require('mongoose')
+// require('dotenv').config()
 
-// import mongoose from 'mongoose'
-// import dotenv from 'dotenv'
-// dotenv.config()
+import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
 
 mongoose.connection.on('error', (error) => {
   console.log('Error durante el proceso de conexión:', error)
@@ -20,6 +20,6 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING, {
   // useCreateIndex: true,
 })
 
-module.exports = mongoose.connection
+// module.exports = mongoose.connection
 
-// export default mongoose.connection
+export default mongoose.connection

@@ -1,48 +1,33 @@
 {
-  "name": "nodeapi",
+  "name": "expresstuned",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build00": "npm-run-all clean transpile",
-    "build": "babel server --out-dir transp-server",
-    "clean00": "rimraf transp-server",
-    "dev": "cross-env NODE_ENV=development DEBUG=nodeapi:* nodemon",
-    "initDB": "node initDB.js",
-    "prod": "cross-env NODE_ENV=production npm-run-all build server",
-    "server": "node transp-server/bin/www",
-    "start": "npm run prod",
-    "transpile": "babel ./server --watch --out-dir transp-server"
+    "build": "babel server --out-dir transpiled",
+    "start": "node ./server/bin/www",
+    "help": "babel -h ./"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
-    "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "express-async-handler": "^1.2.0",
     "http-errors": "~1.6.3",
-    "mongoose": "^6.1.0",
+    "mongoose": "^6.1.1",
     "morgan": "~1.9.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.0",
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",
-    "nodemon": "^2.0.15",
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
+    "nodemon": "^2.0.15"
   },
   "nodemonConfig": {
     "exec": "npm run build && npm run server",
     "watch": [
       "public/*",
-      "lib/*",
       "server/*",
       "models/*"
     ],
