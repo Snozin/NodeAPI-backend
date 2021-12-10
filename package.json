@@ -3,12 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "babel server --out-dir transpiled",
-    "start": "node ./server/bin/www",
+    "dev": "cross-env NODE_ENV=development DEBUG=nodeapi:* nodemon",
+    "build": "babel --delete-dir-on-start --out-dir transpiled server",
+    "initDB": "node ./transpiled/utils/initDB.js",
+    "server": "node ./transpiled/bin/www",
+    "start": "npm run dev",
     "help": "babel -h ./"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "cross-env": "^7.0.3",
     "debug": "~2.6.9",
     "dotenv": "^10.0.0",
     "ejs": "~2.6.1",

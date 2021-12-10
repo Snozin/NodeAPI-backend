@@ -1,4 +1,4 @@
 {
   "presets": [["@babel/preset-env"]],
-  "ignore": ["node_modules", "models", "initDB.js"]
+  "ignore": ["node_modules"]
 }

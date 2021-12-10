@@ -1,10 +1,11 @@
 require('dotenv').config()
 
-const mongoose = require('mongoose')
-const readline = require('readline')
-const connection = require('./lib/MongooseConnection.js')
-// const { Agent, User } = require('./models')
-const { User } = require('./models')
+import 'regenerator-runtime/runtime'
+import mongoose from 'mongoose'
+import readline from 'readline'
+import connection from '../lib/MongooseConnection'
+
+import { User } from '../../models'
 
 const main = async () => {
   await new Promise((resolve, reject) => {
