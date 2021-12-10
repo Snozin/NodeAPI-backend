@@ -28,7 +28,6 @@ advertSchema.statics.loadJSON = async function (file) {
   }
 
   return numAdverts
-  // return {numAdverts, adverts}
 }
 
 const Advert = mongoose.model('Advert', advertSchema)

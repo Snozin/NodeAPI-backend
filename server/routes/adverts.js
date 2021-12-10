@@ -2,7 +2,7 @@ import express from 'express'
 import asyncHandler from 'express-async-handler'
 import path from 'path'
 import fs from 'fs/promises'
-import { Advert } from '../../models'
+// import { Advert } from '../../models'
 
 const router = express.Router()
 
@@ -18,13 +18,15 @@ router.get(
 
     const file = path.join(__dirname, '../../anuncios.json')
 
-    const numAdverts = await Advert.loadJSON(file)
+    // const numAdverts = await Advert.loadJSON(file)
     
-    // const data = await fs.readFile(file, { encoding: 'utf-8' })
-    console.log(numAdverts)
+    const data = await fs.readFile(file, { encoding: 'utf-8' })
+    // console.log(numAdverts)
+    console.log('Cosa mala aaaa')
 
     // res.json(adverts)
-    res.send(path.join(__dirname, '../../anuncios.json'))
+    res.json(JSON.parse(data))
+    // res.send(path.join(__dirname, '../../anuncios.json'))
   })
 )
 
