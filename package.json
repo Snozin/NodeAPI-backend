@@ -31,9 +31,8 @@
   "nodemonConfig": {
     "exec": "npm run build && npm run server",
     "watch": [
-      "public/*",
       "server/*",
-      "models/*"
+      "package.json"
     ],
     "ignore": []
   }
