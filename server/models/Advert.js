@@ -1,5 +1,5 @@
-const mongoose = require('mongoose')
-const fs = require('fs/promises')
+import mongoose from 'mongoose'
+import fs from 'fs/promises'
 
 const advertSchema = mongoose.Schema(
   {
@@ -32,4 +32,4 @@ advertSchema.statics.loadJSON = async function (file) {
 
 const Advert = mongoose.model('Advert', advertSchema)
 
-module.exports = Advert
+export default Advert

@@ -9,6 +9,8 @@ import indexRouter from './routes/index'
 import usersRouter from './routes/users'
 import advertsRouter from './routes/adverts'
 
+import APIadverts from './routes/api/adverts'
+
 import './lib/MongooseConnection'
 
 const app = express()
@@ -24,9 +26,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../public')))
 
+// Rutas del API
+app.use('/api/adverts', APIadverts)
+
 // Variable global de las vistas
 app.locals.title = "NodeAPI"
 
+// Rutas de las vistass
 app.use('/', indexRouter)
 app.use('/users', usersRouter)
 app.use('/adverts', advertsRouter)
