@@ -5,7 +5,7 @@ import mongoose from 'mongoose'
 import readline from 'readline'
 import connection from '../lib/MongooseConnection'
 
-import { User } from '../../models'
+import { User, Agent } from '../models'
 
 const main = async () => {
   await new Promise((resolve, reject) => {
@@ -18,7 +18,7 @@ const main = async () => {
     return process.exit(0)
   }
 
-  // await dropCollection('Users')
+  // await dropCollection('Agents')
   // await initAgents()
   await initUsers()
 
@@ -59,7 +59,7 @@ const initUsers = async () => {
   console.log(`Insertados ${result.length} usuarios.`)
 }
 
-// Eliminar la tabla Agentes completa
+// Eliminar la tabla recibida completa
 const dropCollection = async (collection) => {
   // const dropped = await connection.dropCollection("agents")
   const dropped = await connection.dropCollection(collection)

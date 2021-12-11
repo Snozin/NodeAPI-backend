@@ -2,10 +2,16 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <p>Me llamo <%= name2 %> pero <%= name %></p>
+
+    <!-- se puede usar <%- %> en vez de <%= > 
+    El primer caso no incluye la protección contra 
+    la inyección de código y el segundo si.
+    -->
   </body>
 </html>

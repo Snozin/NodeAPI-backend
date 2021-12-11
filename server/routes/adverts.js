@@ -1,8 +1,7 @@
 import express from 'express'
 import asyncHandler from 'express-async-handler'
 import path from 'path'
-import fs from 'fs/promises'
-import { Advert } from '../../models'
+import { Advert } from '../models'
 
 const router = express.Router()
 

@@ -5,7 +5,7 @@ const agentSchema = mongoose.Schema(
     name: { type: String, index: true },
     age: { type: Number, index: true },
   },
-  { collection: 'agents' }
+  { collection: 'Agents' }
 )
 
 // agentSchema.statics.list = function (filter, limit, skip, fields, sort) {
