@@ -3,10 +3,10 @@ import fs from 'fs/promises'
 
 const advertSchema = mongoose.Schema(
   {
-    nombre: { type: String, index: true },
-    precio: { type: Number, index: true },
-    venta: { type: Boolean, index: true },
-    foto: String,
+    name: { type: String, index: true },
+    price: { type: Number, index: true },
+    sale: { type: Boolean, index: true },
+    photo: String,
     tags: { type: [String], index: true },
   },
   {
