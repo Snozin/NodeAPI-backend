@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development DEBUG=nodeapi:* nodemon",
     "build": "babel --delete-dir-on-start --out-dir transpiled server",
+    "dev": "cross-env NODE_ENV=development DEBUG=nodeapi:* nodemon",
     "initDB": "node ./transpiled/utils/initDB.js",
     "server": "node ./transpiled/bin/www",
-    "start": "npm run dev",
-    "help": "babel -h ./"
+    "setup": "npm run initDB && npm run dev",
+    "start": "npm run dev"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

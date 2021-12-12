@@ -8,13 +8,19 @@ Copy `.env.example` into `.env` and set your own config
 
     npm install
 
+## First time
+
+    npm run setup
+
+Runs `initDB` to setup DB and `npm start` to start development.
+
 ## Set Initial DB
 
     npm run initDB
 
-Initializes DB with data from `initialAdverts.json`
+Drops Adverts DB and loads placeholder data from `initialAdverts.json`
 
-## Development Start
+## Dev Start
 
     npm start
 
