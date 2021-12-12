@@ -4,15 +4,11 @@
 
 Copy `.env.example` into `.env` and set your own config
 
-## Install Dependencies
-
-    npm install
-
 ## First time
 
     npm run setup
 
-Runs `initDB` to setup DB and `npm start` to start development.
+Installs dependencies, runs `build` to generate Babel's compilation, runs `initDB` to setup DB and runs `npm start` to start development.
 
 ## Set Initial DB
 
