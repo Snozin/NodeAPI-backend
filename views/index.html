@@ -6,9 +6,27 @@
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-    <p>Me llamo <%= name2 %> pero <%= name %> Jiji</p>
 
-    <%# Soy una comentación #%>
+    <h2>Anuncios Relevantes</h2>
+    <ul>
+      <% results.forEach( (item)=> { %>
+      <li>
+        <h3><%= item.name %></h3>
+        <p>Precio: <%= item.price %></p>
+
+        <img src="/images/<%= item.photo %>" alt="Imagen de <%= item.name %>" />
+        <p>
+          <span>
+            <small>
+              Tags: <% item.tags.forEach((tag)=>{%>
+              <a href="#">#<%= tag %></a>
+              <%}) %>
+            </small>
+          </span>
+        </p>
+      </li>
+      <%}) %>
+    </ul>
+    <%# //TODO Añadir estilos y maquetar #%>
   </body>
 </html>

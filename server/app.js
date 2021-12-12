@@ -6,7 +6,6 @@ import logger from 'morgan'
 import ejs from 'ejs'
 
 import indexRouter from './routes/index'
-import usersRouter from './routes/users'
 import advertsRouter from './routes/adverts'
 
 import APIadverts from './routes/api/adverts'
@@ -31,12 +30,8 @@ app.use(express.static(path.join(__dirname, '../public')))
 // Rutas del API
 app.use('/api/adverts', APIadverts)
 
-// Variable global de las vistas
-app.locals.title = 'NodeAPI'
-
 // Rutas de las vistass
 app.use('/', indexRouter)
-app.use('/users', usersRouter)
 app.use('/adverts', advertsRouter)
 
 // catch 404 and forward to error handler

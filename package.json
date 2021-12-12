@@ -31,7 +31,8 @@
     "exec": "npm run build && npm run server",
     "watch": [
       "server/*",
-      "package.json"
+      "package.json",
+      ".env"
     ],
     "ignore": []
   }

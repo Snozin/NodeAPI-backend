@@ -20,8 +20,6 @@ Initializes DB with data from `initialAdverts.json`
 
 ---
 
-<br />
-
 ## API Routes
 
 ## GET
