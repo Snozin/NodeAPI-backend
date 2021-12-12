@@ -15,3 +15,11 @@
 ## Development Start
 
     npm start
+
+
+## API Routes
+  ### GET /api/adverts
+Returns all the adverts
+
+### POST /api/adverts
+Create a new advert 

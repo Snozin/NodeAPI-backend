@@ -1,20 +1,18 @@
-import express from 'express'
+import express, { json } from 'express'
+import createError from 'http-errors'
 // import asyncHandler from 'express-async-handler'
 import { Advert } from '../../models'
 
 const router = express.Router()
 
-// router.get(
-//   '/',
-//   asyncHandler(async (req, res, next) => {
-//     const adverts = Advert.find()
-//     res.json({results: adverts})
-//   })
-// )
-
 router.get('/', async (req, res, next) => {
-  const adverts = await Advert.find()
-  res.json({ results: adverts })
+  try {
+    JSON.parse('asd')
+    const adverts = await Advert.find()
+    res.json({ data: adverts })
+  } catch (err) {
+    next(createError(500, `Error al obtener datos de la BD. \n ${err}`))
+  }
 })
 
 export default router
