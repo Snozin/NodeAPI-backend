@@ -1,8 +1,8 @@
 {
-  "anuncios": [
+  "adverts": [
     {
       "name": "Boli BIC y regalo entrada",
-      "sale": true,
+      "sale": false,
       "price": 150,
       "photo": "boli.png",
       "tags": ["lifestyle", "work"]
@@ -15,11 +15,18 @@
       "tags": ["lifestyle"]
     },
     {
-      "name": "",
+      "name": "Ducati",
+      "sale": false,
+      "price": 350,
+      "photo": "patinete.png",
+      "tags": ["motor"]
+    },
+    {
+      "name": "Samnsung Fold 2",
       "sale": true,
-      "price": 10000,
-      "photo": "iphone.png",
-      "tags": ["lifestyle"]
+      "price": 1850,
+      "photo": "samsung.png",
+      "tags": ["mobile", "work"]
     }
   ]
 }

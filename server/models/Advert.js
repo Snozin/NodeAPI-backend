@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import path from 'path'
 import fs from 'fs/promises'
 
 const advertSchema = mongoose.Schema(
@@ -14,20 +15,34 @@ const advertSchema = mongoose.Schema(
   }
 )
 
+advertSchema.statics.filterList = async function (
+  filter,
+  skip,
+  limit,
+  select,
+  sort
+) {
+  const query = Advert.find(filter)
+
+  query.skip(parseInt(skip))
+  query.limit(parseInt(limit))
+  query.select(select)
+  query.sort(sort)
+
+  return query.exec()
+}
+
 // Cargar json de anuncios
-advertSchema.statics.loadJSON = async function (file) {
+advertSchema.statics.loadJSON = async function () {
+  const file = path.join(__dirname, '../../initialAdverts.json')
   const data = await fs.readFile(file, { encoding: 'utf-8' })
 
   if (!data) throw new Error(`${file} está vacío!`)
 
-  const adverts = JSON.parse(data).anuncios
-  const numAdverts = adverts.length
+  const adverts = JSON.parse(data).adverts
+  const insertedAdverts = await Advert.insertMany(adverts)
 
-  for (const ad of adverts) {
-    await new Advert(ad).save()
-  }
-
-  return numAdverts
+  return insertedAdverts
 }
 
 const Advert = mongoose.model('Advert', advertSchema)

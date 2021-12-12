@@ -1,11 +1,11 @@
-require('dotenv').config()
-
 import 'regenerator-runtime/runtime'
-import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+dotenv.config()
+
 import readline from 'readline'
 import connection from '../lib/MongooseConnection'
 
-import { User, Agent } from '../models'
+import { User, Advert } from '../models'
 
 const main = async () => {
   await new Promise((resolve, reject) => {
@@ -18,53 +18,40 @@ const main = async () => {
     return process.exit(0)
   }
 
-  // await dropCollection('Agents')
-  // await initAgents()
-  await initUsers()
+  await initAdverts()
+  // await initUsers()
 
-  mongoose.connection.close()
+  connection.close()
 }
 
-const initAgents = async () => {
-  const { deletedCount } = await Agent.deleteMany()
-  console.log(`Eliminados ${deletedCount} agentes.`)
+const initAdverts = async () => {
+  try {
+    const { deletedCount } = await Advert.deleteMany()
+    console.log(`Eliminados ${deletedCount} anuncios`)
 
-  const result = await Agent.insertMany([
-    {
-      name: 'Smith',
-      age: 30,
-    },
-    {
-      name: 'Doe',
-      age: 0,
-    },
-  ])
-  console.log(`Insertados ${result.length} agentes.`)
+    const inserted = await Advert.loadJSON()
+    console.log(`Insertados ${inserted.length} anuncios`)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-const initUsers = async () => {
-  const { deletedCount } = await User.deleteMany()
-  console.log(`Eliminados ${deletedCount} usuarios`)
+// const initUsers = async () => {
+//   const { deletedCount } = await User.deleteMany()
+//   console.log(`Eliminados ${deletedCount} usuarios`)
 
-  const result = await User.insertMany([
-    {
-      email: 'admin@example.com',
-      password: 1234,
-    },
-    {
-      email: 'user@example.com',
-      password: 1234,
-    },
-  ])
-  console.log(`Insertados ${result.length} usuarios.`)
-}
-
-// Eliminar la tabla recibida completa
-const dropCollection = async (collection) => {
-  // const dropped = await connection.dropCollection("agents")
-  const dropped = await connection.dropCollection(collection)
-  console.log('Borrado', dropped)
-}
+//   const result = await User.insertMany([
+//     {
+//       email: 'admin@example.com',
+//       password: 1234,
+//     },
+//     {
+//       email: 'user@example.com',
+//       password: 1234,
+//     },
+//   ])
+//   console.log(`Insertados ${result.length} usuarios.`)
+// }
 
 const confirm = (questionText) =>
   new Promise((resolve, reject) => {

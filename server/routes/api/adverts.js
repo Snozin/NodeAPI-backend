@@ -2,15 +2,34 @@ import express from 'express'
 import createError from 'http-errors'
 import { Advert } from '../../models'
 
+import { getPriceValues } from '../../lib/utils'
+
 const router = express.Router()
 
 const msg404 = 'No se encontró el elemento:'
 
+router.get('/tags', (req, res, next) => {
+  try {
+    res.json({ results: ['Lifestyle', 'mobile', 'work', 'motor'] })
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.get('/', async (req, res, next) => {
   try {
-    const adverts = await Advert.find()
+    const { name, tags, sale, price, skip, limit, select, sort } = req.query
+    const filter = {
+      // Crear el filtro condicionalmente
+      ...(name ? { name: new RegExp(name, 'i') } : {}),
+      ...(price ? { price: getPriceValues(price) } : {}),
+      ...(tags ? { tags: tags.split(' ') } : {}),
+      ...(sale !== undefined ? { sale: sale } : {}),
+    }
 
-    res.json({ result: adverts })
+    const adverts = await Advert.filterList(filter, skip, limit, select, sort)
+
+    res.json({ results: adverts })
   } catch (error) {
     next(error)
   }
@@ -23,11 +42,10 @@ router.get('/:id', async (req, res, next) => {
 
     if (advert.length === 0) {
       next(createError(404, `${msg404} ${_id}`))
-      // res.status(404).json({ error: `${msg404} ` })
       return
     }
 
-    res.json({ result: advert })
+    res.json({ results: advert })
   } catch (error) {
     next(error)
   }
@@ -39,23 +57,7 @@ router.post('/', async (req, res, next) => {
     const advert = new Advert(advertData)
     const createdAdvert = await advert.save()
 
-    res.status(201).json({ result: createdAdvert })
-  } catch (error) {
-    next(error)
-  }
-})
-
-router.delete('/:id', async (req, res, next) => {
-  try {
-    const _id = req.params.id
-    const { deletedCount } = await Advert.deleteOne({ _id })
-
-    if (deletedCount === 0) {
-      next(createError(404, `${msg404} ${_id}`))
-      return
-    }
-
-    res.json({ result: 'deleted.' })
+    res.status(201).json({ results: createdAdvert })
   } catch (error) {
     next(error)
   }
@@ -74,7 +76,23 @@ router.put('/:id', async (req, res, next) => {
       return
     }
 
-    res.json({ result: advert })
+    res.json({ results: advert })
+  } catch (error) {
+    next(error)
+  }
+})
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const _id = req.params.id
+    const { deletedCount } = await Advert.deleteOne({ _id })
+
+    if (deletedCount === 0) {
+      next(createError(404, `${msg404} ${_id}`))
+      return
+    }
+
+    res.json({ results: 'deleted.' })
   } catch (error) {
     next(error)
   }
